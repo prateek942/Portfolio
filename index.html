@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" style="color-scheme:dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Prateek Kumar Pandey — Full-Stack Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0c10; --bg2:#10141a; --panel:#12161d;
+  --text:#eef1f4; --dim:#8e96a3; --dim2:#5b6270;
+  --amber:#ffb454; --amber-dim:#3a2c18;
+  --teal:#5fd6c4;
+  --line:rgba(255,255,255,.09);
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-padding-top:70px;background:var(--bg);}
+body{
+  background:
+    radial-gradient(ellipse 900px 500px at 85% -10%, rgba(255,180,84,.10), transparent 60%),
+    radial-gradient(ellipse 700px 500px at -10% 20%, rgba(95,214,196,.06), transparent 55%),
+    var(--bg);
+  background-attachment:fixed;
+  color:var(--text);
+  font-family:'IBM Plex Sans',sans-serif;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+::selection{background:var(--amber);color:#1a1408;}
+.serif{font-family:'Fraunces',serif;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+
+/* progress bar */
+#progress{position:fixed;top:0;left:0;height:2px;background:var(--amber);width:0%;z-index:100;transition:width .1s linear;}
+
+/* nav */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:90;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 2.4rem;
+  background:rgba(10,12,16,.72);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+nav .mark{font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;}
+nav .mark span{color:var(--amber);}
+nav .links{display:flex;gap:2.1rem;font-size:.85rem;color:var(--dim);}
+nav .links a:hover{color:var(--text);}
+nav .cta{
+  font-family:'IBM Plex Mono',monospace;font-size:.78rem;
+  border:1px solid var(--line);padding:.5rem 1rem;border-radius:2px;
+  color:var(--text);
+}
+nav .cta:hover{border-color:var(--amber);color:var(--amber);}
+@media(max-width:760px){nav .links{display:none;}}
+
+.wrap{max-width:1120px;margin:0 auto;padding:0 2.4rem;}
+
+/* HERO */
+.hero{
+  min-height:100svh;
+  display:grid;grid-template-columns:1.15fr .85fr;
+  align-items:center;gap:2rem;
+  padding-top:5rem;
+}
+.hero .kicker{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:'IBM Plex Mono',monospace;font-size:.76rem;color:var(--teal);
+  margin-bottom:1.6rem; opacity:0; animation:rise .7s .1s forwards;
+}
+.hero .kicker i{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.hero h1{
+  font-size:clamp(2.6rem,5.4vw,4.4rem);
+  font-weight:500;letter-spacing:-.015em;line-height:1.02;
+  margin-bottom:1.3rem;
+  opacity:0; animation:rise .7s .22s forwards;
+}
+.hero h1 em{font-style:italic;color:var(--amber);font-weight:500;}
+.hero .role{
+  font-family:'IBM Plex Mono',monospace;font-size:1rem;color:var(--dim);
+  margin-bottom:1.5rem;
+  opacity:0; animation:rise .7s .34s forwards;
+}
+.hero .role .cursor{display:inline-block;width:8px;height:1.1em;background:var(--amber);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite;}
+.hero p.lede{
+  max-width:46ch;color:var(--dim);font-size:1.02rem;margin-bottom:2.2rem;
+  opacity:0; animation:rise .7s .46s forwards;
+}
+.hero .actions{display:flex;gap:1rem;flex-wrap:wrap;opacity:0; animation:rise .7s .58s forwards;}
+.btn-primary{
+  background:var(--amber);color:#1a1408;font-weight:600;font-size:.9rem;
+  padding:.85rem 1.5rem;border-radius:3px;
+}
+.btn-primary:hover{background:#ffc476;}
+.btn-secondary{
+  border:1px solid var(--line);color:var(--text);font-size:.9rem;
+  padding:.85rem 1.5rem;border-radius:3px;font-family:'IBM Plex Mono',monospace;
+}
+.btn-secondary:hover{border-color:var(--dim);}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* hero schematic */
+.schema{position:relative;height:420px;}
+.schema svg{width:100%;height:100%;}
+.schema .node-label{font-family:'IBM Plex Mono',monospace;font-size:11px;fill:var(--dim);}
+.schema .node-label.hi{fill:var(--amber);}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;text-align:left;}
+  .schema{height:220px;order:-1;}
+}
+
+/* section shell */
+section{padding:6.5rem 0;border-top:1px solid var(--line);}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.76rem;color:var(--amber);margin-bottom:.7rem;}
+h2.title{font-family:'Fraunces',serif;font-weight:500;font-size:2rem;margin-bottom:3rem;letter-spacing:-.01em;}
+
+/* experience timeline */
+.timeline{position:relative;padding-left:2.4rem;}
+.timeline::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line);}
+.tl-item{position:relative;padding-bottom:3rem;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-item::before{
+  content:"";position:absolute;left:-2.4rem;top:5px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--amber);
+}
+.tl-item time{font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--dim2);display:block;margin-bottom:.35rem;}
+.tl-item h3{font-size:1.2rem;font-weight:600;margin-bottom:.15rem;}
+.tl-item .org{color:var(--teal);font-size:.92rem;margin-bottom:1rem;}
+.tl-item ul{padding-left:1.1rem;color:var(--dim);font-size:.94rem;}
+.tl-item li{margin-bottom:.55rem;}
+.tl-item li::marker{color:var(--amber);}
+
+/* projects */
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;}
+@media(max-width:800px){.proj-grid{grid-template-columns:1fr;}}
+.proj-card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:border-color .2s;}
+.proj-card:hover{border-color:rgba(255,180,84,.35);}
+.proj-bar{display:flex;align-items:center;gap:.4rem;padding:.7rem .9rem;background:var(--bg2);border-bottom:1px solid var(--line);}
+.proj-bar i{width:8px;height:8px;border-radius:50%;background:var(--dim2);}
+.proj-bar span{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--dim2);margin-left:.4rem;}
+.proj-body{padding:1.7rem 1.7rem 1.9rem;}
+.proj-body h3{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:500;margin-bottom:.7rem;}
+.proj-body p{color:var(--dim);font-size:.92rem;margin-bottom:1rem;}
+.proj-list{list-style:none;margin-bottom:1.3rem;}
+.proj-list li{position:relative;padding-left:1.1rem;color:var(--dim);font-size:.87rem;margin-bottom:.5rem;}
+.proj-list li::before{content:"→";position:absolute;left:0;color:var(--amber);}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;}
+.tags span{
+  font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--teal);
+  border:1px solid rgba(95,214,196,.3);padding:.28rem .6rem;border-radius:20px;
+}
+
+/* skills */
+.skill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.4rem 3rem;}
+@media(max-width:700px){.skill-grid{grid-template-columns:1fr;}}
+.skill-cat{border-left:2px solid var(--line);padding-left:1.3rem;}
+.skill-cat.hi{border-left-color:var(--amber);}
+.skill-cat h4{font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--text);margin-bottom:.6rem;}
+.skill-cat p{color:var(--dim);font-size:.92rem;}
+
+/* milestones */
+.mile-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;}
+@media(max-width:700px){.mile-grid{grid-template-columns:1fr;}}
+.mile{background:var(--panel);padding:1.6rem 1.7rem;}
+.mile time{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--dim2);}
+.mile h4{font-size:1rem;margin:.35rem 0 .3rem;}
+.mile p{color:var(--dim);font-size:.87rem;}
+
+/* contact / footer */
+.contact{
+  border-top:1px solid var(--line);padding:6.5rem 0 4rem;text-align:center;
+}
+.contact h2{font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:1.6rem;}
+.contact .row{display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;margin-bottom:3rem;}
+.contact-links{display:flex;justify-content:center;gap:2.2rem;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--dim);margin-bottom:3.5rem;}
+.contact-links a:hover{color:var(--amber);}
+footer{text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--dim2);padding-bottom:2.5rem;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;}
+  html{scroll-behavior:auto;}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav>
+  <div class="mark">prateek<span>.</span>dev</div>
+  <div class="links">
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#milestones">Milestones</a>
+  </div>
+  <a class="cta" href="mailto:workwithprateekpandey@gmail.com">Say hello</a>
+</nav>
+
+<header class="wrap hero">
+  <div>
+    <div class="kicker"><i></i>Available for remote roles</div>
+    <h1>Prateek Kumar Pandey builds<br>full-stack products <em>end to end.</em></h1>
+    <div class="role">React · Next.js · Node.js · PostgreSQL<span class="cursor"></span></div>
+    <p class="lede">A year spent maintaining enterprise SAP ABAP systems for a global energy client, now channelled into shipping fast, well-structured web applications — 200+ LeetCode problems deep and counting.</p>
+    <div class="actions">
+      <a class="btn-primary" href="mailto:workwithprateekpandey@gmail.com">Get in touch</a>
+      <a class="btn-secondary" href="https://github.com/prateek942" target="_blank" rel="noopener">View GitHub ↗</a>
+    </div>
+  </div>
+  <div class="schema">
+    <svg viewBox="0 0 320 420" fill="none">
+      <path d="M40 380 C 90 380, 90 300, 140 300 S 190 220, 230 220" stroke="#2a2f38" stroke-width="1.5"/>
+      <path d="M140 300 C 160 300, 160 180, 200 180 S 250 90, 270 60" stroke="#2a2f38" stroke-width="1.5"/>
+      <circle cx="40" cy="380" r="5" fill="#5fd6c4"/>
+      <circle cx="140" cy="300" r="5" fill="#5b6270"/>
+      <circle cx="230" cy="220" r="5" fill="#5b6270"/>
+      <circle cx="270" cy="60" r="6" fill="#ffb454"/>
+      <text x="55" y="384" class="node-label">ABAP</text>
+      <text x="155" y="304" class="node-label">REST APIs</text>
+      <text x="245" y="224" class="node-label">React / Next.js</text>
+      <text x="235" y="45" class="node-label hi">Full-Stack Engineer</text>
+    </svg>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="experience">
+    <div class="eyebrow">2025 — Present</div>
+    <h2 class="title">Experience</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <time>2025 — Present</time>
+        <h3>SAP ABAP Consultant</h3>
+        <div class="org">Tata Consultancy Services · Client: Energy Australia</div>
+        <ul>
+          <li>Developed, tested, and maintained custom ABAP reports, enhancements, and integrations supporting enterprise business processes for a global energy-sector client.</li>
+          <li>Built a custom ABAP report to upload files from the local system to the SAP application server (AL11), handling file validation, encoding checks, and error logging for reliable data transfer.</li>
+          <li>Developed and consumed BAPIs and RFCs for cross-module integration, and worked with IDocs to exchange data between SAP and external systems.</li>
+          <li>Translated functional requirements into scalable backend solutions, focusing on data processing, validation, error handling, and maintainable code.</li>
+          <li>Investigated and resolved production issues through debugging and root-cause analysis, working within SLA timelines to minimize business disruption.</li>
+          <li>Worked closely with functional consultants and cross-functional teams to understand requirements, troubleshoot issues, and deliver reliable solutions.</li>
+          <li>Participated in code reviews, unit testing, and deployment activities, following enterprise SDLC and development standards.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <time>Prior</time>
+        <h3>MERN Stack Development Intern</h3>
+        <div class="org">Full-stack Training Program</div>
+        <ul>
+          <li>Built dynamic single-page applications using React.js, integrated with backend Node.js/Express.js servers.</li>
+          <li>Designed REST APIs and managed data flow using MongoDB and JSON Web Tokens for secure authentication.</li>
+          <li>Collaborated in an intensive, credit-bearing training environment to build real-world full-stack projects from conception to deployment.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="eyebrow">Selected work</div>
+    <h2 class="title">Projects</h2>
+    <div class="proj-grid">
+      <a class="proj-card" href="https://swifturl-5fxu.onrender.com/" target="_blank" rel="noopener">
+        <div class="proj-bar"><i></i><i></i><i></i><span>swifturl-5fxu.onrender.com ↗</span></div>
+        <div class="proj-body">
+          <h3>SwiftURL</h3>
+          <p>A secure URL shortening service with an Express REST API and a PostgreSQL data layer managed through Drizzle ORM.</p>
+          <ul class="proj-list">
+            <li>JWT-based authentication with bcrypt password hashing and protected route middleware</li>
+            <li>Collision-checked short-code generation, with an indexed lookup column for fast redirects</li>
+            <li>Full CRUD endpoints for link management — create, edit, deactivate, and view usage per link</li>
+            <li>Deployed on Render with a Neon-hosted Postgres instance</li>
+          </ul>
+          <div class="tags"><span>Node.js</span><span>Express</span><span>PostgreSQL</span><span>Drizzle ORM</span><span>JWT</span></div>
+        </div>
+      </a>
+      <a class="proj-card" href="https://leetcode-clone-x3ej.onrender.com/" target="_blank" rel="noopener">
+        <div class="proj-bar"><i></i><i></i><i></i><span>leetcode-clone-x3ej.onrender.com ↗</span></div>
+        <div class="proj-body">
+          <h3>LeetCode Clone</h3>
+          <p>A LeetCode-style practice platform built on the Next.js 13 App Router, with MongoDB handling problem data and user state.</p>
+          <ul class="proj-list">
+            <li>Session-based authentication guarding submission and progress-tracking routes</li>
+            <li>In-browser Python code editor with a test-runner that executes submissions against hidden test cases and grades pass/fail</li>
+            <li>MongoDB schemas for per-user progress, favorites, and submission history</li>
+            <li>RESTful API routes for problems, submissions, likes, and timers, with a responsive Tailwind UI</li>
+          </ul>
+          <div class="tags"><span>Next.js 13</span><span>TypeScript</span><span>MongoDB</span><span>Tailwind CSS</span></div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="eyebrow">Capabilities</div>
+    <h2 class="title">Technical Skills</h2>
+    <div class="skill-grid">
+      <div class="skill-cat hi">
+        <h4>Frontend</h4>
+        <p>React.js, Next.js, TypeScript, Tailwind CSS, Zustand, Recoil, TanStack Query</p>
+      </div>
+      <div class="skill-cat hi">
+        <h4>Backend &amp; Database</h4>
+        <p>Node.js, Express.js, PostgreSQL, MySQL, MongoDB, Prisma, Drizzle ORM, REST APIs, JWT Auth</p>
+      </div>
+      <div class="skill-cat">
+        <h4>SAP / Enterprise</h4>
+        <p>ABAP, Custom Reports, BAPI, RFC, IDoc Integration, AL11 File Handling, Debugging</p>
+      </div>
+      <div class="skill-cat">
+        <h4>Languages &amp; Tooling</h4>
+        <p>Python, JavaScript, TypeScript, Java, C++, Git, GitHub, Docker, DigitalOcean, Render</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="milestones">
+    <div class="eyebrow">Beyond the day job</div>
+    <h2 class="title">Education, Certifications &amp; Achievements</h2>
+    <div class="mile-grid">
+      <div class="mile">
+        <time>09/2020 – 10/2024</time>
+        <h4>B.Tech, Computer Science and Engineering</h4>
+        <p>Vellore Institute of Technology, Bhopal</p>
+      </div>
+      <div class="mile">
+        <time>2022</time>
+        <h4>Smart India Hackathon</h4>
+        <p>Runner-up, Internal Hackathon round.</p>
+      </div>
+      <div class="mile">
+        <time>TCS CodeVita</time>
+        <h4>Ranked 2509</h4>
+        <p>Nationwide TCS coding competition.</p>
+      </div>
+      <div class="mile">
+        <time>Open Source</time>
+        <h4>Contributor, Career-OS</h4>
+        <p>Resolved GitHub issues; merged a pull request fixing CV path resolution.</p>
+      </div>
+      <div class="mile">
+        <time>1,000+ listeners</time>
+        <h4>Tech Podcaster &amp; Mentor</h4>
+        <p>Mentored junior developers on roadmaps, GitHub workflows, and DSA practices.</p>
+      </div>
+      <div class="mile">
+        <time>50+ participants</time>
+        <h4>AdVITya Football Tournament</h4>
+        <p>Organized and coordinated the event.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="contact wrap">
+  <h2>Let's build something worth shipping.</h2>
+  <div class="contact-links">
+    <a href="mailto:workwithprateekpandey@gmail.com">workwithprateekpandey@gmail.com</a>
+    <a href="tel:+918737972438">+91-8737972438</a>
+    <a href="https://github.com/prateek942" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</div>
+<footer>Prateek Kumar Pandey — Lucknow, Uttar Pradesh</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+  document.getElementById('progress').style.width=pct+'%';
+});
+</script>
+
+</body>
+</html>
