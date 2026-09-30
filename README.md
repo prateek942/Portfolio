@@ -2,7 +2,7 @@
 
 Personal portfolio website showcasing my experience, projects, technical skills, achievements, and software engineering journey.
 
-🌐 **Live Portfolio:** [Add your portfolio URL here]
+🌐 **Live Portfolio:** https://prateek942.github.io/Portfolio/
 
 ---
 
